@@ -9,25 +9,28 @@
 </head>
 
 <body>
-    <div id="header">
-        <h1>
-            Rock Paper Scissors Game
-        </h1>
-    </div>
+  <div id="header">
+    <h1>
+      Rock Paper Scissors Game
+    </h1>
+  </div>
+  <div id="welcome"></div>
   <div class="wrapper">
-  <div class="buttons">
-    <button class="rpsButton" value="Rock">✊</button>
-    <button class="rpsButton" value="Paper">🤚</button>
-    <button class="rpsButton" value="Scissors">✌</button>
+
+    <div class="buttons">
+      <button class="rpsButton" value="Rock">✊</button>
+      <button class="rpsButton" value="Paper">🤚</button>
+      <button class="rpsButton" value="Scissors">✌</button>
+    </div>
+    <div class="resultContainer">
+      <div id="player-score"></div><br>
+      <div id="hands"></div><br>
+      <div id="result"></div>
+      <button id='playGameButton'> Play Game </button>
+      <button id='endGameButton'> End Game </button>
+    </div>
   </div>
-  <div class="resultContainer">
-  <div id="player-score"></div><br>
-  <div id="hands"></div><br>
-  <div id="result"></div>
-  <button id='endGameButton'> End Game </button>
-  </div>
-  </div>
-  
+
   <script src="app.js"></script>
 </body>
 

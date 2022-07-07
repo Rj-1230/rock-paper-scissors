@@ -13,6 +13,18 @@
 // ** getComputerChoice randomly selects between `rock` `paper` `scissors` and returns that string **
 // getComputerChoice() 👉 'Rock'
 // getComputerChoice() 👉 'Scissors'
+const playerName = prompt('Enter your name');
+const wrapperDiv = document.getElementById('welcome');
+wrapperDiv.innerText= `Welcome ${playerName} . Let's Play !! `;
+document.getElementById('playGameButton').style.visibility = 'visible';
+document.getElementById('endGameButton').style.visibility = 'visible';
+
+// const playBtn = document.getElementById('playGameButton');
+//    playBtn.innerHTML= `<button id='playGameButton'> Play Game </button>`;
+//    const endBtn = document.getElementById('endGameButton');
+// endBtn.innerHTML = `<button id='endGameButton'> End Game </button>`;
+
+
 
 const totalScores = {playerScore : 0, computerScore:0};
 function getComputerChoice() {
@@ -65,7 +77,7 @@ function showResult(score, playerChoice, computerChoice) {
   // Don't forget to grab the div with the 'result' id!
 //   resultDiv.innerText = 
 
-if(score==-1){
+if(score==1){
     resultDiv.innerText = 'You Won !!';
 }
 else if(score==0){
@@ -75,8 +87,8 @@ else{
         resultDiv.innerText = 'You Lose !';
     
 }
-playerScoreDiv.innerText = "Your Score = "+ totalScores['playerScore']+ '\u00a0 \u00a0 \u00a0' + "Computer Score = "+totalScores['computerScore'];
-handsDiv.innerText = "You : " + playerChoice +   '\u00a0 \u00a0 \u00a0' + " Vs   \u00a0 \u00a0 \u00a0  Computer : " +computerChoice;
+playerScoreDiv.innerText = `${playerName} Score = ${totalScores['playerScore']} \u00a0 \u00a0 \u00a0 Computer Score = ${totalScores['computerScore']}`;
+handsDiv.innerText = `${playerName} chose ${playerChoice} \u00a0 \u00a0 \u00a0  Vs   \u00a0 \u00a0 \u00a0  Computer chose ${computerChoice}`;
 
 }
 
@@ -94,16 +106,27 @@ function onClickRPS(playerChoice) {
 
 // ** Make the RPS buttons actively listen for a click and do something once a click is detected **
 function playGame() {
+  document.getElementById('endGameButton').style.visibility = 'visible';
+  totalScores['computerScore']=0;
+totalScores['playerScore']=0;
+  const handsDiv = document.getElementById('hands');
+  const playerScoreDiv = document.getElementById('player-score');
+  const resultDiv = document.getElementById('result');
+
+playerScoreDiv.innerText = ' New Game ';
+handsDiv.innerText = '';
+resultDiv.innerText='';
   // use querySelector to select all RPS Buttons
 const rpsButtons = document.querySelectorAll('.rpsButton');
 // console.log(rpsButtons);
-rpsButtons[0].onclick = ()=> console.log(rpsButtons[0].value);
+// rpsButtons[0].onclick = ()=> console.log(rpsButtons[0].value);
 
   // * Adds an on click event listener to each RPS button and every time you click it, it calls the onClickRPS function with the RPS button that was last clicked *
   
   // 1. loop through the buttons using a forEach loop
   rpsButtons.forEach(rpsButton =>{
     rpsButton.onclick = ()=>{
+      // document.getElementById('playGameButton').style.visibility = 'hidden';
         onClickRPS(rpsButton.value);
     }
   })
@@ -112,6 +135,9 @@ rpsButtons[0].onclick = ()=> console.log(rpsButtons[0].value);
   // 4. Make sure to pass the currently selected rps button as an argument
 
    // Add a click listener to the end game button that runs the endGame() function on click
+  //  const playBtn = document.getElementById('playGameButton');
+  //  playBtn.innerHTML= `<button id='playGameButton' disabled> Play Game </button>`; 
+  //  document.getElementById('playGameButton').style.visibility = 'hidden';
  const endBtn = document.getElementById('endGameButton');
  endBtn.onclick =()=>{
     endGame();
@@ -123,15 +149,34 @@ rpsButtons[0].onclick = ()=> console.log(rpsButtons[0].value);
 
 // ** endGame function clears all the text on the DOM **
 function endGame() {
-  totalScores['computerScore']=0;
-  totalScores['playerScore']=0;
+  
   const handsDiv = document.getElementById('hands');
   const playerScoreDiv = document.getElementById('player-score');
   const resultDiv = document.getElementById('result');
 
-playerScoreDiv.innerText = ' Game reset ';
+playerScoreDiv.innerText = `Final Score :- ${playerName}= ${totalScores['playerScore']} \u00a0 \u00a0  Computer = ${totalScores['computerScore']} `;
 handsDiv.innerText = '';
-resultDiv.innerText='';
+console.log(totalScores['computerScore']);
+console.log(totalScores['playerScore']);
+if(totalScores['computerScore']>totalScores['playerScore']){
+  resultDiv.innerText=`Computer se har gaye yaar tum ${playerName}`;
+}
+else if(totalScores['computerScore']<totalScores['playerScore']){
+  resultDiv.innerText=`Computer se hi jeete ho ${playerName}. Itna v khush na ho`;
+}
+else{
+  resultDiv.innerText=`Na ${playerName} jeeta Na computer. Dono bekar hai`;
+}
+
+totalScores['computerScore']=0;
+totalScores['playerScore']=0;
+// const endBtn = document.getElementById('endGameButton');
+// endBtn.innerHTML = `<button id='endGameButton' disabled> End Game </button>`;
+document.getElementById('endGameButton').style.visibility = 'hidden';
+const playBtn = document.getElementById('playGameButton');
+ playBtn.onclick =()=>{
+    playGame();
+ }
 
 }
 
